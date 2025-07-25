@@ -1,21 +1,26 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import RecipeList from '../screens/RecipeList';
 import RecipeDetail from '../screens/RecipeDetail';
 
-// Creating the stack navigator for screen transitions
+// Create a Stack Navigator
 const Stack = createStackNavigator();
 
-// Handles switching between screens
+// Navigation component for app with animated transitions
 const AnimatedNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="RecipeList"
       screenOptions={{
-        headerShown: false, // We'll design our own headers if needed
-        animationEnabled: true, // Enables basic transition animation
+        // Apply custom transition animations (fade, slide, etc.)
+        ...TransitionPresets.SlideFromRightIOS,
+        headerShown: false, // Hide default header for a cleaner look
       }}
     >
+      {/* Main list screen */}
       <Stack.Screen name="RecipeList" component={RecipeList} />
+
+      {/* Detail screen with ingredients and timer */}
       <Stack.Screen name="RecipeDetail" component={RecipeDetail} />
     </Stack.Navigator>
   );
